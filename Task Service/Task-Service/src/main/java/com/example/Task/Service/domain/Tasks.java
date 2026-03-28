@@ -15,17 +15,16 @@ import java.util.List;
 @Builder
 public class Tasks {
 
-private long task_id;
-private long user_id;
-private String task_title;
-private String task_description;
-private TaskStatus task_status;
-private TaskPriority task_priority;
-private LocalDate task_day;
-private LocalTime start_time;
-private LocalTime end_time;
-private boolean weekly;
-private List<SubTasks> subTasksList;
-
-
+    private long task_id;
+    private long user_id;
+    private String task_title;
+    private String task_description;
+    private TaskStatus task_status;
+    private TaskPriority task_priority;
+    private TaskScheduleType schedule_type;
+    private LocalDate start_date;
+    private LocalDate end_date;
+    private LocalTime start_time;
+    private LocalTime end_time;
+    private List<SubTasks> subTasksList;
 }

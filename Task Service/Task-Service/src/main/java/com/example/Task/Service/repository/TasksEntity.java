@@ -1,9 +1,8 @@
 package com.example.Task.Service.repository;
 
-import com.example.Task.Service.domain.SubTasks;
 import com.example.Task.Service.domain.TaskPriority;
+import com.example.Task.Service.domain.TaskScheduleType;
 import com.example.Task.Service.domain.TaskStatus;
-import com.example.Task.Service.domain.TaskType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -17,8 +16,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jakarta.persistence.CascadeType.ALL;
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -27,46 +24,47 @@ import static jakarta.persistence.CascadeType.ALL;
 @DynamicUpdate
 @Table(name = "tasks")
 public class TasksEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
     private long task_id;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private long user_id;
+
     @NotBlank
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String task_title;
 
     @NotBlank
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String task_description;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 32)
+    @Column(name = "task_status", nullable = false, length = 32)
     private TaskStatus task_status = TaskStatus.TODO;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 32)
-    private TaskPriority task_priority= TaskPriority.MEDIUM;
+    @Column(name = "task_priority", nullable = false, length = 32)
+    private TaskPriority task_priority;
 
-    @NotBlank
-    @Column(nullable = false)
-    private LocalDate task_day;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "schedule_type", nullable = false, length = 32)
+    private TaskScheduleType schedule_type;
 
-    @NotBlank
-    @Column(nullable = false)
+    @Column(name = "start_date", nullable = false)
+    private LocalDate start_date;
+
+    @Column(name = "end_date", nullable = false)
+    private LocalDate end_date;
+
+    @Column(name = "start_time")
     private LocalTime start_time;
 
-    @NotBlank
-    @Column(nullable = false)
+    @Column(name = "end_time")
     private LocalTime end_time;
-
-
-    @Column(nullable = false)
-    private boolean weekly;
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubTasksEntity> subTasksList = new ArrayList<>();
-
 }

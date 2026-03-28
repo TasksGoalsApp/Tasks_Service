@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "sub_tasks")
 public class SubTasksEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,8 +34,7 @@ public class SubTasksEntity {
     @Column(name = "subtask_completed")
     private boolean subTask_completed;
 
-    @NotBlank
-    @Length( max = 50)
+
     @Column(name = "completedDate")
     private LocalDate completedDate;
 }

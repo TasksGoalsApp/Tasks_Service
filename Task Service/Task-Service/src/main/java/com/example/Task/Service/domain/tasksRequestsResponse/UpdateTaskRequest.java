@@ -1,6 +1,7 @@
 package com.example.Task.Service.domain.tasksRequestsResponse;
 
 import com.example.Task.Service.domain.TaskPriority;
+import com.example.Task.Service.domain.TaskScheduleType;
 import com.example.Task.Service.domain.TaskStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,23 +20,29 @@ import java.time.LocalTime;
 public class UpdateTaskRequest {
 
     @NotNull
-    private long taskId;
+    private Long taskId;
+
     @NotBlank
     private String task_title;
+
     @NotBlank
     private String task_description;
-    @NotBlank
+
+    @NotNull
     private TaskStatus task_status;
-    @NotBlank
+
+    @NotNull
     private TaskPriority task_priority;
-    @NotNull
-    private LocalDate task_day;
 
     @NotNull
+    private TaskScheduleType schedule_type;
+
+    @NotNull
+    private LocalDate start_date;
+
+    @NotNull
+    private LocalDate end_date;
+
     private LocalTime start_time;
-
-    @NotNull
     private LocalTime end_time;
-
-    private boolean weekly;
 }
