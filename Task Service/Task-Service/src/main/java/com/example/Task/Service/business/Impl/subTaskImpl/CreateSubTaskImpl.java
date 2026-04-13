@@ -8,6 +8,7 @@ import com.example.Task.Service.repository.SubTasksRepository;
 import com.example.Task.Service.repository.SubTasksEntity;
 import com.example.Task.Service.repository.TasksEntity;
 import com.example.Task.Service.repository.TasksRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class CreateSubTaskImpl implements ICreateSubTask {
     private final SubTasksRepository subTasksRepository;
     private final TasksRepository tasksRepository;
 
-
+    @Transactional
     @Override
     public CreateSubTaskResponse createSubTask(CreateSubTaskRequest request) {
         TasksEntity tasksEntity = tasksRepository.findById(request.getTasks_id())

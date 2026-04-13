@@ -22,7 +22,7 @@ public class GetAllTasksByUserImpl implements IGetAllTasksByUser {
     @Transactional
     @Override
     public GetAllTaskByUserResponse getAllTaskByUser(GetTasksByUserRequest request) {
-        List<TasksEntity> entities = tasksRepository.findByUser_id(request.getUserId());
+        List<TasksEntity> entities = tasksRepository.findByUserId(request.getUserId());
 
         List<Tasks> tasks = entities.stream()
                 .map(TasksConvertor::convert)

@@ -41,7 +41,7 @@ public class CreateTaskImpl implements ICreateTask {
                 .task_description(request.getDescription())
                 .task_title(request.getTitle())
                 .task_status(TaskStatus.TODO)
-                .user_id(request.getUserId())
+                .userId(request.getUserId())
                 .schedule_type(request.getSchedule_type())
                 .start_date(request.getStart_date())
                 .end_date(request.getEnd_date())

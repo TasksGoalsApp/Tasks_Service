@@ -44,7 +44,7 @@ public class UpdateTaskImpl implements IUpdateTask {
 
         return UpdateTaskResponse.builder()
                 .task_id(savedTask.getTask_id())
-                .user_id(savedTask.getUser_id())
+                .userId(savedTask.getUserId())
                 .task_title(savedTask.getTask_title())
                 .task_description(savedTask.getTask_description())
                 .task_status(savedTask.getTask_status())

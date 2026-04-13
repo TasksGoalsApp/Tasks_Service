@@ -27,8 +27,8 @@ public class TaskController {
     private IGetAllTasksByUser getAllTasksByUser;
 
 
-    @PostMapping
-    @PermitAll
+    @PostMapping("/create")
+//    @PermitAll
     public ResponseEntity<CreateTaskResponse> createTask(@RequestBody @Valid CreateTaskRequest createTaskRequest) {
         CreateTaskResponse createTaskResponse = createTask.createTask(createTaskRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(createTaskResponse);

@@ -31,7 +31,7 @@ public class TasksEntity {
     private long task_id;
 
     @Column(name = "user_id", nullable = false)
-    private long user_id;
+    private long userId;
 
     @NotBlank
     @Column(name = "title", nullable = false)

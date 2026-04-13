@@ -16,7 +16,7 @@ import java.util.List;
 public class Tasks {
 
     private long task_id;
-    private long user_id;
+    private long userId;
     private String task_title;
     private String task_description;
     private TaskStatus task_status;

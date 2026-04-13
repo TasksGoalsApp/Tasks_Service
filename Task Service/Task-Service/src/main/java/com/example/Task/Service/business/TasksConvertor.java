@@ -23,7 +23,7 @@ public class TasksConvertor {
 
         return Tasks.builder()
                 .task_id(tasksEntity.getTask_id())
-                .user_id(tasksEntity.getUser_id())
+                .userId(tasksEntity.getUserId())
                 .task_title(tasksEntity.getTask_title())
                 .task_description(tasksEntity.getTask_description())
                 .task_status(tasksEntity.getTask_status())
