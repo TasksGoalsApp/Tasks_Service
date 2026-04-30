@@ -6,5 +6,5 @@ import com.example.Task.Service.domain.tasksRequestsResponse.GetTasksByUserReque
 
 public interface IGetAllTasksByUser {
 
-GetAllTaskByUserResponse getAllTaskByUser(GetTasksByUserRequest request);
+GetAllTaskByUserResponse getAllTaskByUser(long userId);
 }

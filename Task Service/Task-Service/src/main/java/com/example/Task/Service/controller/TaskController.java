@@ -42,8 +42,8 @@ public class TaskController {
     }
     @GetMapping("/user/{userId}")
     @PermitAll
-    public ResponseEntity<GetAllTaskByUserResponse> showTasks(@RequestBody GetTasksByUserRequest request) {
-        GetAllTaskByUserResponse tasks = getAllTasksByUser.getAllTaskByUser(request);
+    public ResponseEntity<GetAllTaskByUserResponse> showTasks(@PathVariable long userId) {
+        GetAllTaskByUserResponse tasks = getAllTasksByUser.getAllTaskByUser(userId);
         return ResponseEntity.status(HttpStatus.OK).body(tasks);
     }
 
