@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface SubTasksRepository extends JpaRepository<SubTaskEntity, Long> {
-    List<SubTaskEntity> findByTasksEntity_Task_id(Long taskId);
+   // List<SubTaskEntity> findByTasksEntity_Task_id(Long taskId);
 
-    Optional<SubTaskEntity> findByTaskId(long task_Id);
+    Optional<SubTaskEntity> findByTask_TaskId(Long taskId);
 }

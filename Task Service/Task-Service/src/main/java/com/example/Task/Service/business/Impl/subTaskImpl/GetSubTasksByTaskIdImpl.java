@@ -20,7 +20,7 @@ public class GetSubTasksByTaskIdImpl implements IGetSubTasksByTaskId {
     @Override
     public GetSubTasksByTaskIdResponse getSubTasksByTaskId(long  taskId) {
 
-        List<SubTask> subTaskList = subTasksRepository.findByTaskId(taskId)
+        List<SubTask> subTaskList = subTasksRepository.findByTask_TaskId(taskId)
                 .stream()
                 .map(SubTaskConverter::convert)
                 .toList();
