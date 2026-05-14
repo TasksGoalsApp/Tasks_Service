@@ -17,7 +17,7 @@ public class UpdateSubTaskRequest {
     private long subTask_id;
     @NotBlank
     private String subTask_title;
-    @NotBlank
+    @NotNull
     private boolean subTask_completed;
     @NotBlank
     private LocalDate completedDate;

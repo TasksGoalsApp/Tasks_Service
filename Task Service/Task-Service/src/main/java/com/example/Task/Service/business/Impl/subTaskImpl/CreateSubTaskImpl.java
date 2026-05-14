@@ -5,8 +5,8 @@ import com.example.Task.Service.business.Impl.ResourceNotFoundException;
 import com.example.Task.Service.domain.subtasksRequestsResponse.CreateSubTaskRequest;
 import com.example.Task.Service.domain.subtasksRequestsResponse.CreateSubTaskResponse;
 import com.example.Task.Service.repository.SubTasksRepository;
-import com.example.Task.Service.repository.SubTasksEntity;
-import com.example.Task.Service.repository.TasksEntity;
+import com.example.Task.Service.repository.SubTaskEntity;
+import com.example.Task.Service.repository.TaskEntity;
 import com.example.Task.Service.repository.TasksRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -21,25 +21,26 @@ public class CreateSubTaskImpl implements ICreateSubTask {
     @Transactional
     @Override
     public CreateSubTaskResponse createSubTask(CreateSubTaskRequest request) {
-        TasksEntity tasksEntity = tasksRepository.findById(request.getTasks_id())
-                .orElseThrow(() -> new ResourceNotFoundException("Task id not found"));
-
-        SubTasksEntity subTasksEntity = savedSubTasks(request);
+        SubTaskEntity subTaskEntity = savedSubTasks(request);
 
         return CreateSubTaskResponse.builder()
-                .subtaskId(subTasksEntity.getSubTask_id())
+                .subtaskId(subTaskEntity.getSubTask_id())
                 .build();
     }
 
-    private SubTasksEntity savedSubTasks(CreateSubTaskRequest request){
-        SubTasksEntity subTasksEntity = SubTasksEntity.builder()
+    private SubTaskEntity savedSubTasks(CreateSubTaskRequest request){
+
+        TaskEntity taskEntity = tasksRepository.findById(request.getTasks_id())
+                .orElseThrow(() -> new ResourceNotFoundException("Task id not found"));
+
+        SubTaskEntity subTaskEntity = SubTaskEntity.builder()
                 .subTask_completed(false)
-                .task(TasksEntity.builder().task_id(request.getTasks_id()).build())
+                .task(taskEntity)
                 .subTask_title(request.getSubTask_title())
                 .completedDate(request.getCompletedDate())
                 .build();
 
-        return subTasksRepository.save(subTasksEntity);
+        return subTasksRepository.save(subTaskEntity);
     }
 
 }

@@ -23,48 +23,48 @@ import java.util.List;
 @Entity
 @DynamicUpdate
 @Table(name = "tasks")
-public class TasksEntity {
+public class TaskEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
-    private long task_id;
+    private long taskId;
 
     @Column(name = "user_id", nullable = false)
     private long userId;
 
     @NotBlank
     @Column(name = "title", nullable = false)
-    private String task_title;
+    private String taskTitle;
 
     @NotBlank
     @Column(name = "description", nullable = false)
-    private String task_description;
+    private String taskDescription;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "task_status", nullable = false, length = 32)
-    private TaskStatus task_status = TaskStatus.TODO;
+    private TaskStatus taskStatus = TaskStatus.TODO;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "task_priority", nullable = false, length = 32)
-    private TaskPriority task_priority;
+    private TaskPriority taskPriority;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "schedule_type", nullable = false, length = 32)
-    private TaskScheduleType schedule_type;
+    private TaskScheduleType scheduleType;
 
     @Column(name = "start_date", nullable = false)
-    private LocalDate start_date;
+    private LocalDate startDate;
 
     @Column(name = "end_date", nullable = false)
-    private LocalDate end_date;
+    private LocalDate endDate;
 
     @Column(name = "start_time")
-    private LocalTime start_time;
+    private LocalTime startTime;
 
     @Column(name = "end_time")
-    private LocalTime end_time;
+    private LocalTime endTime;
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SubTasksEntity> subTasksList = new ArrayList<>();
+    private List<SubTaskEntity> subTasksList = new ArrayList<>();
 }

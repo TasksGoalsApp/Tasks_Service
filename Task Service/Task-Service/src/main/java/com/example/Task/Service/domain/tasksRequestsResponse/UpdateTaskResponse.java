@@ -14,13 +14,13 @@ import java.time.LocalTime;
 public class UpdateTaskResponse {
     private long task_id;
     private long userId;
-    private String task_title;
-    private String task_description;
-    private TaskStatus task_status;
-    private TaskPriority task_priority;
-    private TaskScheduleType schedule_type;
-    private LocalDate start_date;
-    private LocalDate end_date;
-    private LocalTime start_time;
-    private LocalTime end_time;
+    private String taskTitle;
+    private String taskDescription;
+    private TaskStatus taskStatus;
+    private TaskPriority taskPriority;
+    private TaskScheduleType scheduleType;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private LocalTime startTime;
+    private LocalTime endTime;
 }

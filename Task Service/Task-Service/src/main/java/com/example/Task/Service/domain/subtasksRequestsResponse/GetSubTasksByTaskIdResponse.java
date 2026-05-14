@@ -1,6 +1,6 @@
 package com.example.Task.Service.domain.subtasksRequestsResponse;
 
-import com.example.Task.Service.domain.SubTasks;
+import com.example.Task.Service.domain.SubTask;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,5 +13,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetSubTasksByTaskIdResponse {
-    List<SubTasks> subTasks;
+    List<SubTask> subTasks;
 }

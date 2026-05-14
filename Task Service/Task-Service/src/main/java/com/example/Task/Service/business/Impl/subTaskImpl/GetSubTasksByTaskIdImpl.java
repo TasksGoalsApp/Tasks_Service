@@ -2,7 +2,7 @@ package com.example.Task.Service.business.Impl.subTaskImpl;
 
 import com.example.Task.Service.business.IGetSubTasksByTaskId;
 import com.example.Task.Service.business.SubTaskConverter;
-import com.example.Task.Service.domain.SubTasks;
+import com.example.Task.Service.domain.SubTask;
 import com.example.Task.Service.domain.subtasksRequestsResponse.GetSubTasksByTaskIdRequest;
 import com.example.Task.Service.domain.subtasksRequestsResponse.GetSubTasksByTaskIdResponse;
 import com.example.Task.Service.repository.SubTasksRepository;
@@ -18,13 +18,13 @@ public class GetSubTasksByTaskIdImpl implements IGetSubTasksByTaskId {
 
     @Transactional
     @Override
-    public GetSubTasksByTaskIdResponse getSubTasksByTaskId(GetSubTasksByTaskIdRequest request) {
+    public GetSubTasksByTaskIdResponse getSubTasksByTaskId(long  taskId) {
 
-        List<SubTasks> subTasksList = subTasksRepository.findById(request.getTaskId())
+        List<SubTask> subTaskList = subTasksRepository.findByTaskId(taskId)
                 .stream()
                 .map(SubTaskConverter::convert)
                 .toList();
 
-        return new GetSubTasksByTaskIdResponse(subTasksList);
+        return new GetSubTasksByTaskIdResponse(subTaskList);
     }
 }

@@ -1,10 +1,5 @@
-package com.example.Task.Service.domain.tasksRequestsResponse;
+package com.example.Task.Service.domain;
 
-import com.example.Task.Service.domain.TaskPriority;
-import com.example.Task.Service.domain.TaskScheduleType;
-import com.example.Task.Service.domain.TaskStatus;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,37 +7,24 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UpdateTaskRequest {
+public class Task {
 
-    @NotNull
-    private Long taskId;
-
-    @NotBlank
+    private long taskId;
+    private long userId;
     private String taskTitle;
-
-    @NotBlank
     private String taskDescription;
-
-    @NotNull
     private TaskStatus taskStatus;
-
-    @NotNull
     private TaskPriority taskPriority;
-
-    @NotNull
     private TaskScheduleType scheduleType;
-
-    @NotNull
     private LocalDate startDate;
-
-    @NotNull
     private LocalDate endDate;
-
     private LocalTime startTime;
     private LocalTime endTime;
+    private List<SubTask> subTaskList;
 }

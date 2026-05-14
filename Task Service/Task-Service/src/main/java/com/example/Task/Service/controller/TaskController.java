@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @AllArgsConstructor
-@NoArgsConstructor
 @RequestMapping("/tasks")
 @RestController
 public class TaskController {
@@ -41,7 +40,6 @@ public class TaskController {
 
     }
     @GetMapping("/user/{userId}")
-    @PermitAll
     public ResponseEntity<GetAllTaskByUserResponse> showTasks(@PathVariable long userId) {
         GetAllTaskByUserResponse tasks = getAllTasksByUser.getAllTaskByUser(userId);
         return ResponseEntity.status(HttpStatus.OK).body(tasks);

@@ -28,17 +28,17 @@ public class CreateTaskRequest {
     private Long userId;
 
     @NotNull
-    private LocalDate start_date;
+    private LocalDate startDate;
 
     @NotNull
-    private LocalDate end_date;
+    private LocalDate endDate;
 
-    private LocalTime start_time;
-    private LocalTime end_time;
-
-    @NotNull
-    private TaskPriority task_priority;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     @NotNull
-    private TaskScheduleType schedule_type;
+    private TaskPriority taskPriority;
+
+    @NotNull
+    private TaskScheduleType scheduleType;
 }

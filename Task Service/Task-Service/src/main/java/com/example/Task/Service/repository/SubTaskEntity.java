@@ -16,10 +16,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "sub_tasks")
-public class SubTasksEntity {
+public class SubTaskEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "subtask_id")
+    @Column(name = "subtask_id", nullable = false)
     private long subTask_id;
     @NotBlank
     @Length( max = 50)
@@ -28,7 +28,7 @@ public class SubTasksEntity {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="task_id")
-    private TasksEntity task;
+    private TaskEntity task;
 
 
     @Column(name = "subtask_completed")

@@ -12,11 +12,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class SubTasks {
+public class SubTask {
 
     private long subTask_id;
     private String subTask_title;
-    private Tasks tasks;
+    private Task task;
     private boolean subTask_completed;
     private LocalDate completedDate;
 

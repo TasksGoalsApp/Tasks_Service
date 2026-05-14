@@ -1,27 +1,27 @@
 package com.example.Task.Service.business;
 
-import com.example.Task.Service.domain.SubTasks;
-import com.example.Task.Service.domain.Tasks;
-import com.example.Task.Service.repository.SubTasksEntity;
-import com.example.Task.Service.repository.TasksEntity;
+import com.example.Task.Service.domain.SubTask;
+import com.example.Task.Service.domain.Task;
+import com.example.Task.Service.repository.SubTaskEntity;
+import com.example.Task.Service.repository.TaskEntity;
 
 public class SubTaskConverter {
 
 private SubTaskConverter() {}
 
-    public static SubTasks convert(SubTasksEntity subTasksEntity) {
-    return SubTasks.builder()
-            .subTask_id(subTasksEntity.getSubTask_id())
-            .subTask_title(subTasksEntity.getSubTask_title())
-            .subTask_completed(subTasksEntity.isSubTask_completed())
-            .tasks(convertTask(subTasksEntity.getTask()))
-            .completedDate(subTasksEntity.getCompletedDate())
+    public static SubTask convert(SubTaskEntity subTaskEntity) {
+    return SubTask.builder()
+            .subTask_id(subTaskEntity.getSubTask_id())
+            .subTask_title(subTaskEntity.getSubTask_title())
+            .subTask_completed(subTaskEntity.isSubTask_completed())
+            .task(convertTask(subTaskEntity.getTask()))
+            .completedDate(subTaskEntity.getCompletedDate())
             .build();
 
     }
 
-    public static Tasks convertTask(TasksEntity tasksEntity) {
-    return Tasks.builder().task_id(tasksEntity.getTask_id()).build();
+    public static Task convertTask(TaskEntity taskEntity) {
+    return Task.builder().task_id(taskEntity.getTask_id()).build();
 
     }
 

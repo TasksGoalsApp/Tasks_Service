@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface TasksRepository extends JpaRepository<TasksEntity, Long> {
-    List<TasksEntity> findByUserId(long userId);
+public interface TasksRepository extends JpaRepository<TaskEntity, Long> {
+    List<TaskEntity> findByUserId(long userId);
 }

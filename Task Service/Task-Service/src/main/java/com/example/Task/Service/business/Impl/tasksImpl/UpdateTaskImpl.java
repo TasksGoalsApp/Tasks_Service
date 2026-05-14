@@ -4,7 +4,7 @@ import com.example.Task.Service.business.IUpdateTask;
 import com.example.Task.Service.business.Impl.ResourceNotFoundException;
 import com.example.Task.Service.domain.tasksRequestsResponse.UpdateTaskRequest;
 import com.example.Task.Service.domain.tasksRequestsResponse.UpdateTaskResponse;
-import com.example.Task.Service.repository.TasksEntity;
+import com.example.Task.Service.repository.TaskEntity;
 import com.example.Task.Service.repository.TasksRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -19,41 +19,41 @@ public class UpdateTaskImpl implements IUpdateTask {
     @Transactional
     @Override
     public UpdateTaskResponse updateTask(UpdateTaskRequest updateTaskRequest) {
-        TasksEntity tasksEntity = tasksRepository.findById(updateTaskRequest.getTaskId())
+        TaskEntity taskEntity = tasksRepository.findById(updateTaskRequest.getTaskId())
                 .orElseThrow(() -> new ResourceNotFoundException("Task not found!"));
 
         taskScheduleValidator.validate(
-                updateTaskRequest.getSchedule_type(),
-                updateTaskRequest.getStart_date(),
-                updateTaskRequest.getEnd_date(),
-                updateTaskRequest.getStart_time(),
-                updateTaskRequest.getEnd_time()
+                updateTaskRequest.getScheduleType(),
+                updateTaskRequest.getStartDate(),
+                updateTaskRequest.getEndDate(),
+                updateTaskRequest.getStartTime(),
+                updateTaskRequest.getEndTime()
         );
 
-        tasksEntity.setTask_title(updateTaskRequest.getTask_title());
-        tasksEntity.setTask_description(updateTaskRequest.getTask_description());
-        tasksEntity.setTask_status(updateTaskRequest.getTask_status());
-        tasksEntity.setTask_priority(updateTaskRequest.getTask_priority());
-        tasksEntity.setSchedule_type(updateTaskRequest.getSchedule_type());
-        tasksEntity.setStart_date(updateTaskRequest.getStart_date());
-        tasksEntity.setEnd_date(updateTaskRequest.getEnd_date());
-        tasksEntity.setStart_time(updateTaskRequest.getStart_time());
-        tasksEntity.setEnd_time(updateTaskRequest.getEnd_time());
+        taskEntity.setTaskTitle(updateTaskRequest.getTaskTitle());
+        taskEntity.setTaskDescription(updateTaskRequest.getTaskDescription());
+        taskEntity.setTaskStatus(updateTaskRequest.getTaskStatus());
+        taskEntity.setTaskPriority(updateTaskRequest.getTaskPriority());
+        taskEntity.setScheduleType(updateTaskRequest.getScheduleType());
+        taskEntity.setStartDate(updateTaskRequest.getStartDate());
+        taskEntity.setEndDate(updateTaskRequest.getEndDate());
+        taskEntity.setStartTime(updateTaskRequest.getStartTime());
+        taskEntity.setEndTime(updateTaskRequest.getEndTime());
 
-        TasksEntity savedTask = tasksRepository.save(tasksEntity);
+        TaskEntity savedTask = tasksRepository.save(taskEntity);
 
         return UpdateTaskResponse.builder()
-                .task_id(savedTask.getTask_id())
+                .task_id(savedTask.getTaskId())
                 .userId(savedTask.getUserId())
-                .task_title(savedTask.getTask_title())
-                .task_description(savedTask.getTask_description())
-                .task_status(savedTask.getTask_status())
-                .task_priority(savedTask.getTask_priority())
-                .schedule_type(savedTask.getSchedule_type())
-                .start_date(savedTask.getStart_date())
-                .end_date(savedTask.getEnd_date())
-                .start_time(savedTask.getStart_time())
-                .end_time(savedTask.getEnd_time())
+                .taskTitle(savedTask.getTaskTitle())
+                .taskDescription(savedTask.getTaskDescription())
+                .taskStatus(savedTask.getTaskStatus())
+                .taskPriority(savedTask.getTaskPriority())
+                .scheduleType(savedTask.getScheduleType())
+                .startDate(savedTask.getStartDate())
+                .endDate(savedTask.getEndDate())
+                .startTime(savedTask.getStartTime())
+                .endTime(savedTask.getEndTime())
                 .build();
     }
 }

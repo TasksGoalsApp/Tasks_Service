@@ -1,6 +1,6 @@
 package com.example.Task.Service.domain.tasksRequestsResponse;
 
-import com.example.Task.Service.domain.Tasks;
+import com.example.Task.Service.domain.Task;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,5 +13,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetAllTaskByUserResponse {
-    List<Tasks> tasks;
+    List<Task> tasks;
 }

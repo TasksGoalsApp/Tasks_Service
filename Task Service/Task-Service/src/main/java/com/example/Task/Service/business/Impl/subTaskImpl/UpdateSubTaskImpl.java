@@ -4,7 +4,7 @@ import com.example.Task.Service.business.IUpdateSubTask;
 import com.example.Task.Service.business.Impl.ResourceNotFoundException;
 import com.example.Task.Service.domain.subtasksRequestsResponse.UpdateSubTaskRequest;
 import com.example.Task.Service.domain.subtasksRequestsResponse.UpdateSubTaskResponse;
-import com.example.Task.Service.repository.SubTasksEntity;
+import com.example.Task.Service.repository.SubTaskEntity;
 import com.example.Task.Service.repository.SubTasksRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -18,19 +18,19 @@ public class UpdateSubTaskImpl implements IUpdateSubTask {
     @Transactional
     @Override
     public UpdateSubTaskResponse updateSubTask(UpdateSubTaskRequest updateSubTaskRequest) {
-        SubTasksEntity subTasksEntity = subTasksRepository.findById(updateSubTaskRequest.getSubTask_id())
+        SubTaskEntity subTaskEntity = subTasksRepository.findById(updateSubTaskRequest.getSubTask_id())
                 .orElseThrow(() -> new ResourceNotFoundException("SubTask id not found"));
 
-        subTasksEntity.setSubTask_completed(updateSubTaskRequest.isSubTask_completed());
-        subTasksEntity.setSubTask_title(updateSubTaskRequest.getSubTask_title());
-        subTasksEntity.setCompletedDate(updateSubTaskRequest.getCompletedDate());
+        subTaskEntity.setSubTask_completed(updateSubTaskRequest.isSubTask_completed());
+        subTaskEntity.setSubTask_title(updateSubTaskRequest.getSubTask_title());
+        subTaskEntity.setCompletedDate(updateSubTaskRequest.getCompletedDate());
 
-        SubTasksEntity savedSubTasksEntity = subTasksRepository.save(subTasksEntity);
+        SubTaskEntity savedSubTaskEntity = subTasksRepository.save(subTaskEntity);
         return UpdateSubTaskResponse.builder()
-                .subTask_title(savedSubTasksEntity.getSubTask_title())
-                .completedDate(savedSubTasksEntity.getCompletedDate())
-                .subTask_completed(savedSubTasksEntity.isSubTask_completed())
-                .subTask_id(savedSubTasksEntity.getSubTask_id())
+                .subTask_title(savedSubTaskEntity.getSubTask_title())
+                .completedDate(savedSubTaskEntity.getCompletedDate())
+                .subTask_completed(savedSubTaskEntity.isSubTask_completed())
+                .subTask_id(savedSubTaskEntity.getSubTask_id())
                 .build();
 
     }

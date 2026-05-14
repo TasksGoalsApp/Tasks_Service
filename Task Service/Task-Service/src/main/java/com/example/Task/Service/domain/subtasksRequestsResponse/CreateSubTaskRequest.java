@@ -1,6 +1,5 @@
 package com.example.Task.Service.domain.subtasksRequestsResponse;
 
-import com.example.Task.Service.domain.Tasks;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -18,7 +17,7 @@ public class CreateSubTaskRequest {
     private String subTask_title;
     @NotNull
     private long tasks_id;
-    @NotBlank
+    @NotNull
     private boolean subTask_completed;
     @NotNull
     private LocalDate completedDate;
