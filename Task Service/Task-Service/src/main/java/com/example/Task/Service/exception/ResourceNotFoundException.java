@@ -1,4 +1,4 @@
-package com.example.Task.Service.business.Impl;
+package com.example.Task.Service.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
   public ResourceNotFoundException(String msg) {

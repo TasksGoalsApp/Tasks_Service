@@ -19,7 +19,7 @@ public class CreateTaskImpl implements ICreateTask {
 
     @Transactional
     @Override
-    public CreateTaskResponse createTask(CreateTaskRequest request) {
+    public CreateTaskResponse createTask(CreateTaskRequest request, long userId) {
         taskScheduleValidator.validate(
                 request.getScheduleType(),
                 request.getStartDate(),
@@ -28,20 +28,20 @@ public class CreateTaskImpl implements ICreateTask {
                 request.getEndTime()
         );
 
-        TaskEntity taskEntity = saveTask(request);
+        TaskEntity taskEntity = saveTask(request, userId);
 
         return CreateTaskResponse.builder()
                 .taskId(taskEntity.getTaskId())
                 .build();
     }
 
-    private TaskEntity saveTask(CreateTaskRequest request) {
+    private TaskEntity saveTask(CreateTaskRequest request, long userId) {
         TaskEntity taskEntity = TaskEntity.builder()
                 .taskPriority(request.getTaskPriority())
                 .taskDescription(request.getDescription())
                 .taskTitle(request.getTitle())
                 .taskStatus(TaskStatus.TODO)
-                .userId(request.getUserId())
+                .userId(userId)
                 .scheduleType(request.getScheduleType())
                 .startDate(request.getStartDate())
                 .endDate(request.getEndDate())

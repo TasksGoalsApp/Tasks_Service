@@ -1,7 +1,7 @@
 package com.example.Task.Service.business.Impl.subTaskImpl;
 
 import com.example.Task.Service.business.ICreateSubTask;
-import com.example.Task.Service.business.Impl.ResourceNotFoundException;
+import com.example.Task.Service.exception.ResourceNotFoundException;
 import com.example.Task.Service.domain.subtasksRequestsResponse.CreateSubTaskRequest;
 import com.example.Task.Service.domain.subtasksRequestsResponse.CreateSubTaskResponse;
 import com.example.Task.Service.repository.SubTasksRepository;

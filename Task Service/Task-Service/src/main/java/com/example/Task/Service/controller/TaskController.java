@@ -4,13 +4,14 @@ import com.example.Task.Service.business.ICreateTask;
 import com.example.Task.Service.business.IGetAllTasksByUser;
 import com.example.Task.Service.business.IUpdateTask;
 import com.example.Task.Service.domain.tasksRequestsResponse.*;
-import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
@@ -25,22 +26,26 @@ public class TaskController {
     @Autowired
     private IGetAllTasksByUser getAllTasksByUser;
 
-
+    @RolesAllowed({"Customer"})
     @PostMapping("/create")
-//    @PermitAll
-    public ResponseEntity<CreateTaskResponse> createTask(@RequestBody @Valid CreateTaskRequest createTaskRequest) {
-        CreateTaskResponse createTaskResponse = createTask.createTask(createTaskRequest);
+    public ResponseEntity<CreateTaskResponse> createTask(@RequestBody @Valid CreateTaskRequest createTaskRequest, @AuthenticationPrincipal Jwt jwt) {
+        long userId = Long.parseLong(jwt.getClaimAsString("userId"));
+        CreateTaskResponse createTaskResponse = createTask.createTask(createTaskRequest, userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(createTaskResponse);
     }
 
+    @RolesAllowed({"Customer"})
     @PutMapping
     public ResponseEntity<UpdateTaskResponse> updateTask(@RequestBody @Valid UpdateTaskRequest updateTaskRequest) {
         UpdateTaskResponse updateTaskResponse = updateTask.updateTask(updateTaskRequest);
         return ResponseEntity.status(HttpStatus.OK).body(updateTaskResponse);
 
     }
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<GetAllTaskByUserResponse> showTasks(@PathVariable long userId) {
+
+    @RolesAllowed({"Customer"})
+    @GetMapping("/user")
+    public ResponseEntity<GetAllTaskByUserResponse> showTasks(@AuthenticationPrincipal Jwt jwt) {
+        long userId = Long.parseLong(jwt.getClaimAsString("userId"));
         GetAllTaskByUserResponse tasks = getAllTasksByUser.getAllTaskByUser(userId);
         return ResponseEntity.status(HttpStatus.OK).body(tasks);
     }

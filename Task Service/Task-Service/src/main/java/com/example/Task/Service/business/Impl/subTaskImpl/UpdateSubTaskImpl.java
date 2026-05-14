@@ -1,7 +1,7 @@
 package com.example.Task.Service.business.Impl.subTaskImpl;
 
 import com.example.Task.Service.business.IUpdateSubTask;
-import com.example.Task.Service.business.Impl.ResourceNotFoundException;
+import com.example.Task.Service.exception.ResourceNotFoundException;
 import com.example.Task.Service.domain.subtasksRequestsResponse.UpdateSubTaskRequest;
 import com.example.Task.Service.domain.subtasksRequestsResponse.UpdateSubTaskResponse;
 import com.example.Task.Service.repository.SubTaskEntity;

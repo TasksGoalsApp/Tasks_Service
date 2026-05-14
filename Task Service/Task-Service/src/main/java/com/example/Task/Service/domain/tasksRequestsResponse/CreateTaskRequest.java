@@ -25,9 +25,6 @@ public class CreateTaskRequest {
     private String description;
 
     @NotNull
-    private Long userId;
-
-    @NotNull
     private LocalDate startDate;
 
     @NotNull
