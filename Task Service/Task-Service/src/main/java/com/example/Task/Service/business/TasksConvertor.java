@@ -22,17 +22,17 @@ public class TasksConvertor {
         }
 
         return Task.builder()
-                .taskId(taskEntity.getTask_id())
+                .taskId(taskEntity.getTaskId())
                 .userId(taskEntity.getUserId())
-                .taskTitle(taskEntity.getTask_title())
-                .taskDescription(taskEntity.getTask_description())
-                .taskStatus(taskEntity.getTask_status())
-                .taskPriority(taskEntity.getTask_priority())
-                .scheduleType(taskEntity.getSchedule_type())
-                .startDate(taskEntity.getStart_date())
-                .endDate(taskEntity.getEnd_date())
-                .startTime(taskEntity.getStart_time())
-                .endTime(taskEntity.getEnd_time())
+                .taskTitle(taskEntity.getTaskTitle())
+                .taskDescription(taskEntity.getTaskDescription())
+                .taskStatus(taskEntity.getTaskStatus())
+                .taskPriority(taskEntity.getTaskPriority())
+                .scheduleType(taskEntity.getScheduleType())
+                .startDate(taskEntity.getStartDate())
+                .endDate(taskEntity.getEndDate())
+                .startTime(taskEntity.getStartTime())
+                .endTime(taskEntity.getEndTime())
                 .subTaskList(subTaskList)
                 .build();
     }

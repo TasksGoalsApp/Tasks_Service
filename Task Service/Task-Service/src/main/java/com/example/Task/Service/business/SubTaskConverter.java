@@ -21,7 +21,7 @@ private SubTaskConverter() {}
     }
 
     public static Task convertTask(TaskEntity taskEntity) {
-    return Task.builder().task_id(taskEntity.getTask_id()).build();
+    return Task.builder().taskId(taskEntity.getTaskId()).build();
 
     }
 
