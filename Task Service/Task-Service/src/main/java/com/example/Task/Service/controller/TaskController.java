@@ -29,7 +29,7 @@ public class TaskController {
     @RolesAllowed({"Customer"})
     @PostMapping("/create")
     public ResponseEntity<CreateTaskResponse> createTask(@RequestBody @Valid CreateTaskRequest createTaskRequest, @AuthenticationPrincipal Jwt jwt) {
-        long userId = Long.parseLong(jwt.getClaimAsString("userId"));
+        Long userId = jwt.getClaim("id");
         CreateTaskResponse createTaskResponse = createTask.createTask(createTaskRequest, userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(createTaskResponse);
     }
@@ -45,7 +45,7 @@ public class TaskController {
     @RolesAllowed({"Customer"})
     @GetMapping("/user")
     public ResponseEntity<GetAllTaskByUserResponse> showTasks(@AuthenticationPrincipal Jwt jwt) {
-        long userId = Long.parseLong(jwt.getClaimAsString("userId"));
+        Long userId = jwt.getClaim("id");
         GetAllTaskByUserResponse tasks = getAllTasksByUser.getAllTaskByUser(userId);
         return ResponseEntity.status(HttpStatus.OK).body(tasks);
     }
