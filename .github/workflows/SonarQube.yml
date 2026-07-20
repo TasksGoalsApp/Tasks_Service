@@ -34,7 +34,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run:  |
-          cd Task Service
+          cd "Task Service/Task-Service"
           chmod +x ./gradlew
             ./gradlew clean build test jacocoTestReport
           # Run SonarQube analysis, specifying the JaCoCo report path
