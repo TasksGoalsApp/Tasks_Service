@@ -4,6 +4,6 @@ import com.example.Task.Service.domain.subtasksRequestsResponse.UpdateSubTaskReq
 import com.example.Task.Service.domain.subtasksRequestsResponse.UpdateSubTaskResponse;
 
 public interface IUpdateSubTask {
-    UpdateSubTaskResponse updateSubTask(UpdateSubTaskRequest updateSubTaskRequest);
+    UpdateSubTaskResponse updateSubTask(UpdateSubTaskRequest updateSubTaskRequest, Long userId);
 
 }

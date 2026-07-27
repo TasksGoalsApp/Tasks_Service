@@ -19,15 +19,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/tasks")
 @RestController
 public class TaskController {
-    @Autowired
-    private ICreateTask createTask;
-    @Autowired
-    private IUpdateTask updateTask;
-    @Autowired
-    private IGetAllTasksByUser getAllTasksByUser;
+    private final ICreateTask createTask;
+
+    private final IUpdateTask updateTask;
+
+    private final IGetAllTasksByUser getAllTasksByUser;
 
     @RolesAllowed({"Customer"})
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<CreateTaskResponse> createTask(@RequestBody @Valid CreateTaskRequest createTaskRequest, @AuthenticationPrincipal Jwt jwt) {
         Long userId = jwt.getClaim("id");
         CreateTaskResponse createTaskResponse = createTask.createTask(createTaskRequest, userId);
@@ -35,9 +34,11 @@ public class TaskController {
     }
 
     @RolesAllowed({"Customer"})
-    @PutMapping
-    public ResponseEntity<UpdateTaskResponse> updateTask(@RequestBody @Valid UpdateTaskRequest updateTaskRequest) {
-        UpdateTaskResponse updateTaskResponse = updateTask.updateTask(updateTaskRequest);
+    @PutMapping("/{taskId}")
+    public ResponseEntity<UpdateTaskResponse> updateTask(@PathVariable Long taskId, @RequestBody @Valid UpdateTaskRequest updateTaskRequest, @AuthenticationPrincipal Jwt jwt) {
+        Long userId = jwt.getClaim("id");
+        updateTaskRequest.setTaskId(taskId);
+        UpdateTaskResponse updateTaskResponse = updateTask.updateTask(updateTaskRequest, userId);
         return ResponseEntity.status(HttpStatus.OK).body(updateTaskResponse);
 
     }

@@ -9,11 +9,13 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @AllArgsConstructor
-@RequestMapping("/tasks/subtasks")
+@RequestMapping("/tasks/{taskId}/subtasks")
 @RestController
 public class SubTaskController {
 
@@ -22,27 +24,32 @@ public class SubTaskController {
     private final IUpdateSubTask updateSubTask;
     private final IGetSubTasksByTaskId getSubTasksByTaskId;
 
-    @PostMapping("/create")
-    public ResponseEntity<CreateSubTaskResponse> createSubTask(@RequestBody @Valid CreateSubTaskRequest createSubTaskRequest) {
-        CreateSubTaskResponse response = createSubTask.createSubTask(createSubTaskRequest);
+    @PostMapping
+    public ResponseEntity<CreateSubTaskResponse> createSubTask(@PathVariable Long taskId, @RequestBody @Valid CreateSubTaskRequest createSubTaskRequest, @AuthenticationPrincipal Jwt jwt) {
+        Long userId = jwt.getClaim("id");
+        CreateSubTaskResponse response = createSubTask.createSubTask(createSubTaskRequest, userId, taskId);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
 
-    @PutMapping("/delete")
-    public ResponseEntity<UpdateSubTaskResponse> updateSubTask(@RequestBody @Valid UpdateSubTaskRequest request) {
-        return ResponseEntity.ok(updateSubTask.updateSubTask(request));
+    @PutMapping("/{subTaskId}")
+    public ResponseEntity<UpdateSubTaskResponse> updateSubTask(@PathVariable Long taskId, @PathVariable Long subTaskId, @RequestBody @Valid UpdateSubTaskRequest request, @AuthenticationPrincipal Jwt jwt) {
+        Long userId = jwt.getClaim("id");
+        request.setSubTask_id(subTaskId);
+        return ResponseEntity.ok(updateSubTask.updateSubTask(request, userId));
     }
 
     @DeleteMapping("/{subTaskId}")
-    public ResponseEntity<Void> deleteSubTask(@PathVariable Long subTaskId) {
-        deleteSubTask.deleteSubTask(subTaskId);
+    public ResponseEntity<Void> deleteSubTask(@PathVariable Long taskId, @PathVariable Long subTaskId, @AuthenticationPrincipal Jwt jwt) {
+        Long userId = jwt.getClaim("id");
+        deleteSubTask.deleteSubTask(subTaskId, userId);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{taskId}")
-    public ResponseEntity<GetSubTasksByTaskIdResponse> getSubTasksByTaskId(@PathVariable Long taskId) {
-        GetSubTasksByTaskIdResponse response = getSubTasksByTaskId.getSubTasksByTaskId(taskId);
+    @GetMapping
+    public ResponseEntity<GetSubTasksByTaskIdResponse> getSubTasksByTaskId(@PathVariable Long taskId, @AuthenticationPrincipal Jwt jwt) {
+        Long userId = jwt.getClaim("id");
+        GetSubTasksByTaskIdResponse response = getSubTasksByTaskId.getSubTasksByTaskId(taskId, userId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

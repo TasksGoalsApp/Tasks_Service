@@ -4,6 +4,6 @@ import com.example.Task.Service.domain.subtasksRequestsResponse.CreateSubTaskReq
 import com.example.Task.Service.domain.subtasksRequestsResponse.CreateSubTaskResponse;
 
 public interface ICreateSubTask {
-CreateSubTaskResponse createSubTask(CreateSubTaskRequest request);
+    CreateSubTaskResponse createSubTask(CreateSubTaskRequest request, Long userId, Long taskId);
 
 }

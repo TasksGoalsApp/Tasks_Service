@@ -17,8 +17,8 @@ public class UpdateSubTaskImpl implements IUpdateSubTask {
 
     @Transactional
     @Override
-    public UpdateSubTaskResponse updateSubTask(UpdateSubTaskRequest updateSubTaskRequest) {
-        SubTaskEntity subTaskEntity = subTasksRepository.findById(updateSubTaskRequest.getSubTask_id())
+    public UpdateSubTaskResponse updateSubTask(UpdateSubTaskRequest updateSubTaskRequest, Long userId) {
+        SubTaskEntity subTaskEntity = subTasksRepository.findBySubTaskIdAndTask_UserId(updateSubTaskRequest.getSubTask_id(), userId)
                 .orElseThrow(() -> new ResourceNotFoundException("SubTask id not found"));
 
         subTaskEntity.setSubTask_completed(updateSubTaskRequest.isSubTask_completed());
