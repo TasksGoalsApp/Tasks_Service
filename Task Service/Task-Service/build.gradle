@@ -21,12 +21,15 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 }
+jacoco {
+	toolVersion = '0.8.14'
+}
 
 sonar {
 	properties {
 		property "sonar.projectKey", "TasksGoalsApp_Tasks_Service"
 		property "sonar.organization", "tasksgoalsapp"
-		property 'sonar.projectName', 'Habits Service'
+		property 'sonar.projectName', 'Task Service'
 
 		property 'sonar.coverage.jacoco.xmlReportPaths',
 				'build/reports/jacoco/test/jacocoTestReport.xml'
@@ -74,10 +77,10 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+	finalizedBy jacocoTestReport
 }
 jacocoTestReport {
 	dependsOn test
-	finalizedBy jacocoTestReport
 
 	reports {
 		xml.required = true
