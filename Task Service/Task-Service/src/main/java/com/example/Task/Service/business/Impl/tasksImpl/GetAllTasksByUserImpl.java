@@ -1,7 +1,7 @@
 package com.example.Task.Service.business.Impl.tasksImpl;
 
 import com.example.Task.Service.business.IGetAllTasksByUser;
-import com.example.Task.Service.business.TasksConvertor;
+import com.example.Task.Service.business.TasksConverter;
 import com.example.Task.Service.domain.Task;
 import com.example.Task.Service.domain.tasksRequestsResponse.GetAllTaskByUserResponse;
 import com.example.Task.Service.repository.TaskEntity;
@@ -24,7 +24,7 @@ public class GetAllTasksByUserImpl implements IGetAllTasksByUser {
         List<TaskEntity> entities = tasksRepository.findByUserId(userId);
 
         List<Task> tasks = entities.stream()
-                .map(TasksConvertor::convert)
+                .map(TasksConverter::convert)
                 .toList();
 
         return GetAllTaskByUserResponse.builder()
