@@ -15,11 +15,14 @@ import java.util.List;
 @AllArgsConstructor
 public class GetSubTasksByTaskIdImpl implements IGetSubTasksByTaskId {
     private final SubTasksRepository subTasksRepository;
+    private final com.example.Task.Service.repository.TasksRepository tasksRepository;
 
     @Transactional
     @Override
-    public GetSubTasksByTaskIdResponse getSubTasksByTaskId(long  taskId) {
+    public GetSubTasksByTaskIdResponse getSubTasksByTaskId(long taskId, long userId) {
 
+        tasksRepository.findByTaskIdAndUserId(taskId, userId)
+                .orElseThrow(() -> new com.example.Task.Service.exception.ResourceNotFoundException("Task not found"));
         List<SubTask> subTaskList = subTasksRepository.findByTask_TaskId(taskId)
                 .stream()
                 .map(SubTaskConverter::convert)

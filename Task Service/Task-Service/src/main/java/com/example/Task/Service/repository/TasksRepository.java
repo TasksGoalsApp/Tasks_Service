@@ -7,4 +7,5 @@ import java.util.List;
 @Repository
 public interface TasksRepository extends JpaRepository<TaskEntity, Long> {
     List<TaskEntity> findByUserId(long userId);
+    java.util.Optional<TaskEntity> findByTaskIdAndUserId(long taskId, long userId);
 }

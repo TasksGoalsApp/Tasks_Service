@@ -13,7 +13,9 @@ public class DeleteSubTaskImpl implements IDeleteSubTask {
 
     @Transactional
     @Override
-    public void deleteSubTask(long id) {
-        subTasksRepository.deleteById(id);
+    public void deleteSubTask(long id, long userId) {
+        var subtask = subTasksRepository.findOwnedById(id, userId)
+                .orElseThrow(() -> new com.example.Task.Service.exception.ResourceNotFoundException("Subtask not found"));
+        subTasksRepository.delete(subtask);
     }
 }

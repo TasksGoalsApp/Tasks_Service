@@ -20,17 +20,17 @@ public class CreateSubTaskImpl implements ICreateSubTask {
 
     @Transactional
     @Override
-    public CreateSubTaskResponse createSubTask(CreateSubTaskRequest request) {
-        SubTaskEntity subTaskEntity = savedSubTasks(request);
+    public CreateSubTaskResponse createSubTask(CreateSubTaskRequest request, long userId) {
+        SubTaskEntity subTaskEntity = savedSubTasks(request, userId);
 
         return CreateSubTaskResponse.builder()
                 .subtaskId(subTaskEntity.getSubTask_id())
                 .build();
     }
 
-    private SubTaskEntity savedSubTasks(CreateSubTaskRequest request){
+    private SubTaskEntity savedSubTasks(CreateSubTaskRequest request, long userId){
 
-        TaskEntity taskEntity = tasksRepository.findById(request.getTasks_id())
+        TaskEntity taskEntity = tasksRepository.findByTaskIdAndUserId(request.getTasks_id(), userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Task id not found"));
 
         SubTaskEntity subTaskEntity = SubTaskEntity.builder()
