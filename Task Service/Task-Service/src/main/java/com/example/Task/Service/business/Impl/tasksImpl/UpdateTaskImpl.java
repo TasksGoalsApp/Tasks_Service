@@ -18,9 +18,9 @@ public class UpdateTaskImpl implements IUpdateTask {
     private final TaskScheduleValidator taskScheduleValidator;
     @Transactional
     @Override
-    public UpdateTaskResponse updateTask(UpdateTaskRequest updateTaskRequest, long userId) {
+    public UpdateTaskResponse updateTask(UpdateTaskRequest updateTaskRequest, Long userId) {
         TaskEntity taskEntity = tasksRepository.findByTaskIdAndUserId(updateTaskRequest.getTaskId(), userId)
-                .orElseThrow(() -> new ResourceNotFoundException("Task not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Task not found"));
 
         taskScheduleValidator.validate(
                 updateTaskRequest.getScheduleType(),

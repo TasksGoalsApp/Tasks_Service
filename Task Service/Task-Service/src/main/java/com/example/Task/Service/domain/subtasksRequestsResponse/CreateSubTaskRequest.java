@@ -13,13 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class CreateSubTaskRequest {
-    @NotBlank
+    @NotBlank(message = "Subtask title is required")
     private String subTask_title;
-    @NotNull
-    private long tasks_id;
-    @NotNull
-    private boolean subTask_completed;
-    @NotNull
-    private LocalDate completedDate;
 
 }

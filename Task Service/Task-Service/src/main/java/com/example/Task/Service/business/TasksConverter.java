@@ -6,9 +6,9 @@ import com.example.Task.Service.repository.TaskEntity;
 
 import java.util.List;
 
-public class TasksConvertor {
+public class TasksConverter {
 
-    private TasksConvertor() {
+    private TasksConverter() {
     }
 
     public static Task convert(TaskEntity taskEntity) {

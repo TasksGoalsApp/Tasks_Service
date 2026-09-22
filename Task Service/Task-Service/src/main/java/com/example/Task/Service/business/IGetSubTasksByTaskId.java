@@ -4,5 +4,5 @@ import com.example.Task.Service.domain.subtasksRequestsResponse.GetSubTasksByTas
 import com.example.Task.Service.domain.subtasksRequestsResponse.GetSubTasksByTaskIdResponse;
 
 public interface IGetSubTasksByTaskId {
-    GetSubTasksByTaskIdResponse getSubTasksByTaskId(long taskId, long userId);
+    GetSubTasksByTaskIdResponse getSubTasksByTaskId(long taskId, Long userId);
 }

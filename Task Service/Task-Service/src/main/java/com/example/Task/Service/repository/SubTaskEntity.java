@@ -26,7 +26,7 @@ public class SubTaskEntity {
     @Column(name = "subtask_title")
     private String subTask_title;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY, optional = false)
     @JoinColumn(name="task_id")
     private TaskEntity task;
 

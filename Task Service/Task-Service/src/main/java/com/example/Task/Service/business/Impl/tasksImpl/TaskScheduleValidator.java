@@ -1,24 +1,21 @@
 package com.example.Task.Service.business.Impl.tasksImpl;
 
 import com.example.Task.Service.domain.TaskScheduleType;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+@RequiredArgsConstructor
 @Service
 public class TaskScheduleValidator {
+    private final Clock clock;
 
-    public void validate(
-            TaskScheduleType scheduleType,
-            LocalDate startDate,
-            LocalDate endDate,
-            LocalTime startTime,
-            LocalTime endTime
-    ) {
-        LocalDate today = LocalDate.now();
-        LocalTime now = LocalTime.now();
+    public void validate(TaskScheduleType scheduleType, LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
+        LocalDate today = LocalDate.now(clock);
+        LocalTime now = LocalTime.now(clock);
 
         if (scheduleType == null) {
             throw new IllegalArgumentException("Schedule type is required");
@@ -38,20 +35,14 @@ public class TaskScheduleValidator {
 
         switch (scheduleType) {
             case FIXED_TIME -> validateFixedTime(startDate, endDate, startTime, endTime, today, now);
+
             case ALL_DAY -> validateAllDay(startDate, endDate, startTime, endTime);
+
             case WEEK_RANGE -> validateWeekRange(startDate, endDate, startTime, endTime);
-            default -> throw new IllegalArgumentException("Unsupported schedule type");
         }
     }
 
-    private void validateFixedTime(
-            LocalDate startDate,
-            LocalDate endDate,
-            LocalTime startTime,
-            LocalTime endTime,
-            LocalDate today,
-            LocalTime now
-    ) {
+    private void validateFixedTime(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime, LocalDate today, LocalTime now) {
         if (startTime == null || endTime == null) {
             throw new IllegalArgumentException("Fixed time task requires start time and end time");
         }
@@ -69,12 +60,7 @@ public class TaskScheduleValidator {
         }
     }
 
-    private void validateAllDay(
-            LocalDate startDate,
-            LocalDate endDate,
-            LocalTime startTime,
-            LocalTime endTime
-    ) {
+    private void validateAllDay(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
         if (startTime != null || endTime != null) {
             throw new IllegalArgumentException("All day task must not contain time");
         }
@@ -84,12 +70,7 @@ public class TaskScheduleValidator {
         }
     }
 
-    private void validateWeekRange(
-            LocalDate startDate,
-            LocalDate endDate,
-            LocalTime startTime,
-            LocalTime endTime
-    ) {
+    private void validateWeekRange(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
         if (startTime != null || endTime != null) {
             throw new IllegalArgumentException("Week range task must not contain time");
         }

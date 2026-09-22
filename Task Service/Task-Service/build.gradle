@@ -1,7 +1,9 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.5.14'
+	id 'org.springframework.boot' version '3.5.16'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'jacoco'
+	id 'org.sonarqube' version '7.3.1.8318'
 }
 
 group = 'com.example'
@@ -19,6 +21,28 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 }
+jacoco {
+	toolVersion = '0.8.14'
+}
+
+sonar {
+	properties {
+		property "sonar.projectKey", "TasksGoalsApp_Tasks_Service"
+		property "sonar.organization", "tasksgoalsapp"
+		property 'sonar.projectName', 'Task Service'
+
+		property 'sonar.coverage.jacoco.xmlReportPaths',
+				'build/reports/jacoco/test/jacocoTestReport.xml'
+
+		property 'sonar.coverage.exclusions', [
+				'**/config/**',
+				'**/domain/Request/**',
+				'**/domain/Response/**',
+				'**/*Application.java'
+		].join(',')
+	}
+}
+
 
 repositories {
 	mavenCentral()
@@ -34,7 +58,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	implementation 'org.springframework.amqp:spring-rabbit-stream'
+//	implementation 'org.springframework.amqp:spring-rabbit-stream'
 
 	implementation 'io.jsonwebtoken:jjwt-api:0.13.0'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.13.0'
@@ -54,4 +78,14 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+	finalizedBy jacocoTestReport
+}
+jacocoTestReport {
+	dependsOn test
+
+	reports {
+		xml.required = true
+		html.required = true
+		csv.required = false
+	}
 }

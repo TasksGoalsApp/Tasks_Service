@@ -41,6 +41,7 @@ public class TaskEntity {
     @Column(name = "description", nullable = false)
     private String taskDescription;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "task_status", nullable = false, length = 32)
     private TaskStatus taskStatus = TaskStatus.TODO;
@@ -65,6 +66,7 @@ public class TaskEntity {
     @Column(name = "end_time")
     private LocalTime endTime;
 
+    @Builder.Default
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubTaskEntity> subTasksList = new ArrayList<>();
 }
